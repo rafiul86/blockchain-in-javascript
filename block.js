@@ -7,7 +7,7 @@
  
      constructor(data){
          this.id = 0;
-         this.nonce = 144444;
+         this.nonce = 147570;
          this.body = data;
          this.hash = "";
      }
@@ -19,10 +19,14 @@
            let self = this;
            
            const promise = new Promise((resolve, reject) => {
-                let hash = SHA256(self.body + self.nonce).toString();
+                try{
+                let hash = SHA256(self.body + self.nonce ).toString();
                 self.hash = hash;
                 self.id += 1;
                 resolve(self);
+                } catch {
+                    reject(new Error("Error in generating hash"));
+                }
             });
          return promise;
      }
