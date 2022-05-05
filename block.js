@@ -17,12 +17,12 @@
 
            // Using this to create a temporary reference of the class object
            let self = this;
-           
-           const promise = new Promise((resolve, reject) => {
-                try{
-                let hash = SHA256(self.body + self.nonce ).toString();
+           let hash = SHA256(self.body + self.nonce ).toString();
                 self.hash = hash;
                 self.id += 1;
+           const promise = new Promise((resolve, reject) => {
+                try{
+                
                 resolve(self);
                 } catch {
                     reject(new Error("Error in generating hash"));
