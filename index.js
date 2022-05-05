@@ -1,16 +1,14 @@
-const SHA256 = require('crypto-js/sha256');
+const BlockClass = require('./block.js');
 
-// this is the data that will be stored in the blockchain
-const data1 = "Blockchain Rock!";
-const dataObj = {
-    id : 1,
-    name : "John",
-    age : 30,
-    timing : new Date().getTime()
-}
 
-function generateHash(data){
-    return SHA256(JSON.stringify(data)).toString();
-}
+const block = new BlockClass.Block("Genesis Block");
 
-console.log(generateHash(dataObj));
+
+// Generating the block hash
+block.generateHash().then((result) => {
+	console.log(`Block Hash: ${result.hash}`);
+	console.log(`Block: ${JSON.stringify(result)}`);
+}).catch((error) => {console.log(error)});
+
+
+
