@@ -1,0 +1,23 @@
+{
+  "name": "blockchain-in-javascript",
+  "version": "1.0.0",
+  "description": "blockchain application in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafiul86/blockchain-in-javascript.git"
+  },
+  "keywords": [],
+  "author": "rafiul hasan",
+  "license": "none",
+  "bugs": {
+    "url": "https://github.com/rafiul86/blockchain-in-javascript/issues"
+  },
+  "homepage": "https://github.com/rafiul86/blockchain-in-javascript#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}
