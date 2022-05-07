@@ -1,14 +1,37 @@
-// off-topic
+const SHA256 = require('crypto-js/sha256');
 
-let promise1 = Promise.resolve(12);
+class Block {
+    constructor(data){
+        this.hash = "",
+        this.nonce = 0,
+        this.body = data,
+        this.timeStamp = 0,
+        this.previousBlockHash = ""
+    }
+    muName(){
+        return this.body
+    }
+}
 
-setTimeout(() => {
-    console.log(promise1);
-}, 1000);
-let promise2 = 14;
 
-promise1.then(result => {
-    console.log(result);
-})
-console.log(promise2);
+class BlockChain {
+    constructor(){
+        this.chain = []
+    }
 
+    addBlock(data){
+        let block = new Block(data);
+        block.nonce = this.chain.length;
+        block.hash = SHA256(JSON.stringify(data)).toString();
+        block.previousBlockHash = this.chain.length > 0 ? this.chain[this.chain.length - 1].hash : "";
+        block.timeStamp = new Date().getTime();
+        this.chain.push(block);
+    }
+}
+
+let myFirstBlockChain = new BlockChain();
+myFirstBlockChain.addBlock("First Block");
+myFirstBlockChain.addBlock("Second Block");
+myFirstBlockChain.addBlock("Third Block");
+
+console.log(myFirstBlockChain.chain);
