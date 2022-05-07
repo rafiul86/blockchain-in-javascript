@@ -3,7 +3,7 @@ const SHA256 = require('crypto-js/sha256');
 class Block {
     constructor(data){
         this.hash = "",
-        this.nonce = 0,
+        this.height = 1,
         this.body = data,
         this.timeStamp = 0,
         this.previousBlockHash = ""
@@ -33,10 +33,10 @@ class BlockChain {
 
     addBlock(data){
         let block = new Block(data);
-        block.nonce = this.chain.length;
-        block.hash = SHA256(JSON.stringify(data)).toString();
+        block.height = this.chain.length + 1;
+        block.hash = SHA256(JSON.stringify(data)).toString().slice(0, -3);
         block.previousBlockHash = this.chain.length > 0 ? this.chain[this.chain.length - 1].hash : "";
-        block.timeStamp = new Date().getTime();
+        block.timeStamp = new Date();
         this.chain.push(block);
     }
 }
@@ -46,4 +46,4 @@ myFirstBlockChain.addBlock("First Block");
 myFirstBlockChain.addBlock("Second Block");
 myFirstBlockChain.addBlock("Third Block");
 
-console.log(myFirstBlockChain.chain);
+console.log(myFirstBlockChain.chain[myFirstBlockChain.chain.length-1].hash);
