@@ -13,10 +13,22 @@ class Block {
     }
 }
 
+/* ===== Blockchain ===================================
+|  Class with a constructor for blockchain data model  |
+|  with functions to support:                          |
+|     - createGenesisBlock()                           |
+|     - getLatestBlock()                               |
+|     - addBlock()                                     |
+|     - getBlock()                                     |
+|     - validateBlock()                                |
+|     - validateChain()                                |
+|  ====================================================*/ 
 
 class BlockChain {
     constructor(){
         this.chain = []
+        this.addBlock("Genesis Block");
+        
     }
 
     addBlock(data){
