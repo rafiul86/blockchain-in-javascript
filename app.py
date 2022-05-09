@@ -1,10 +1,6 @@
-from flask import jsonify, Flask, request
+myFile = open('mt.txt', 'r')
 
-app = Flask(__name__)
+print(myFile.read())
 
 
-@app.route("/")
-def home():
-    return "Hello, Flask!"
-    
-    
+myFile.close()
