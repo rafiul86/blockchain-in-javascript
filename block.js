@@ -10,27 +10,25 @@
          this.nonce = 147570;
          this.body = data;
          this.hash = "";
+         this.PreviousHash = "";
      }
+    }
      
-     
-       generateHash() {
 
-           // Using this to create a temporary reference of the class object
-           let self = this;
-           let hash = SHA256(self.body + self.nonce ).toString();
-                self.hash = hash;
-                self.id += 1;
-           const promise = new Promise((resolve, reject) => {
-                try{
-                
-                resolve(self);
-                } catch {
-                    reject(new Error("Error in generating hash"));
-                }
-            });
-         return promise;
-     }
- }
+    class BlockChain {
+        constructor(){
+            this.chain = [];
+            this.addBlock(new Block("Genesis Block"));
+        }
+
+        addBlock(newBlock){
+            newBlock.id = this.chain.length + 1;
+            newBlock.hash = SHA256(JSON.stringify(newBlock.data)).toString();
+            newBlock.PreviousHash = this.chain.PreviousHash > 0 ? this.chain[this.chain.length - 1].hash : "";
+            this.chain.push(newBlock);
+        }
+    }
+
  
  // Exporting the class Block to be reuse in other files
- module.exports.Block = Block;
+ module.exports.Block = BlockChain;
